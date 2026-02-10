@@ -1,20 +1,11 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
-
-# Run and deploy your AI Studio app
-
-This contains everything you need to run your app locally.
-
-View your app in AI Studio: https://ai.studio/apps/drive/1-Bb6x_f3EziLAWYjhksqoHzoLuEGr2bv
-
-## Run Locally
-
-**Prerequisites:**  Node.js
+这是一个BPM测量器，用于手工精确测量歌曲的BPM，来用于你的音乐游戏关卡中。可以测量存在变速的歌曲。
 
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
+# 运行
+
+运行前请先安装Node.js
+
+1. 安装依赖:
+   在文件夹内执行`npm install`
+2. 运行:
    `npm run dev`
