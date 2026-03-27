@@ -7,6 +7,6 @@
 运行前请先安装Node.js
 
 1. 安装依赖:
-   在文件夹内执行`npm install`
+   在文件夹内打开cmd执行`npm install`
 2. 运行:`npm run dev`
 3. 在浏览器访问`localhost:3000`
