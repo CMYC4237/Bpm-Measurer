@@ -10,3 +10,4 @@
    在文件夹内执行`npm install`
 2. 运行:
    `npm run dev`
+3.在浏览器打开localhost:3000
