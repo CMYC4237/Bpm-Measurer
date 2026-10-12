@@ -5,27 +5,125 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BPM 测速助手</title>
+    <!-- Fonts are bundled locally so the packaged app renders identically
+         without an internet connection. -->
+    <link rel="stylesheet" href="/fonts.css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Outfit', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+              mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+            },
+            colors: {
+              ink: {
+                DEFAULT: '#E8EDF4',
+                soft: '#9AA6B5',
+                faint: '#6B7787',
+              },
+              paper: {
+                DEFAULT: '#0C1118',
+                soft: '#151C27',
+                line: '#243041',
+              },
+              teal: {
+                DEFAULT: '#14B8A6',
+                bright: '#2DD4BF',
+                soft: '#134E4A',
+                mist: '#0F2F2C',
+              },
+              rose: {
+                DEFAULT: '#FB7185',
+                soft: '#4C1D28',
+              },
+              sky: {
+                DEFAULT: '#38BDF8',
+                soft: '#0C3A52',
+              },
+            },
+            boxShadow: {
+              panel: '0 1px 2px rgba(0, 0, 0, 0.25), 0 8px 24px rgba(0, 0, 0, 0.28)',
+              float: '0 16px 48px rgba(0, 0, 0, 0.45)',
+            },
+            keyframes: {
+              'fade-up': {
+                '0%': { opacity: '0', transform: 'translateY(10px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              'soft-pulse': {
+                '0%, 100%': { opacity: '0.45' },
+                '50%': { opacity: '0.85' },
+              },
+            },
+            animation: {
+              'fade-up': 'fade-up 0.45s ease-out both',
+              'soft-pulse': 'soft-pulse 2.4s ease-in-out infinite',
+            },
+          },
+        },
+      };
+    </script>
     <style>
+      :root {
+        --ink: #E8EDF4;
+        --ink-soft: #9AA6B5;
+        --paper: #0C1118;
+        --paper-soft: #151C27;
+        --line: #243041;
+        --teal: #14B8A6;
+        --canvas: #080C12;
+      }
+      * { box-sizing: border-box; }
       body {
-        background-color: #0f0f0f;
-        color: #e0e0e0;
-        overflow: hidden; /* App handles scrolling */
+        margin: 0;
+        background:
+          radial-gradient(1200px 600px at 10% -10%, rgba(20, 184, 166, 0.10), transparent 55%),
+          radial-gradient(900px 500px at 100% 0%, rgba(56, 189, 248, 0.07), transparent 50%),
+          var(--paper);
+        color: var(--ink);
+        font-family: Outfit, ui-sans-serif, system-ui, sans-serif;
+        overflow: hidden;
       }
-      /* Custom scrollbar for the timeline container if needed */
-      ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #1a1a1a;
-      }
+      ::-webkit-scrollbar { width: 8px; height: 8px; }
+      ::-webkit-scrollbar-track { background: transparent; }
       ::-webkit-scrollbar-thumb {
-        background: #444;
-        border-radius: 4px;
+        background: #3A4758;
+        border-radius: 999px;
+        border: 2px solid transparent;
+        background-clip: padding-box;
       }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #555;
+      ::-webkit-scrollbar-thumb:hover { background: #516074; background-clip: padding-box; border: 2px solid transparent; }
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+      input[type="number"] { -moz-appearance: textfield; }
+      input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        height: 6px;
+        border-radius: 999px;
+        background: #243041;
+        outline: none;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #14B8A6;
+        border: 2px solid #151C27;
+        box-shadow: 0 1px 4px rgba(20, 184, 166, 0.45);
+        cursor: pointer;
+      }
+      kbd {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+      }
+      .drop-zone-active {
+        outline: 2px dashed #14B8A6;
+        outline-offset: -8px;
+        background: rgba(20, 184, 166, 0.08);
       }
     </style>
   <script type="importmap">
@@ -38,7 +136,6 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
 </head>
   <body>
     <div id="root"></div>
